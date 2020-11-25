@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import React from "react";
 let status:string = "false"
 
-export default  function checkRequest(request:any ) {
+export default  function checkRequest(request:string ) {
     fetch(request)
         .then((response)=>{
             if(!response.ok){

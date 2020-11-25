@@ -2,7 +2,7 @@ import {StyleSheet,} from 'react-native';
 
 
 const fonts = StyleSheet.create({
-defautFont:{
+    defaultFont:{
     fontFamily: 'Inter',
     fontStyle: 'normal',
     fontWeight: '600',
