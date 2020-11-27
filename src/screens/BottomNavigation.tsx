@@ -1,7 +1,9 @@
 import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {PrivateOffice} from "./privateOffice/PrivateOffice";
+import {Schedule} from "./schedule/Schedule";
 import {Image} from "react-native";
+import {TaskPage} from "./taskPage/TaskPage";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +21,7 @@ const BottomNavigation = ()=>{
                         />
                     )
                 }}/>
-                <Tab.Screen name="Задачи" component={PrivateOffice} options={{
+                <Tab.Screen name="Задачи" component={TaskPage} options={{
                     tabBarLabel:"",
                     tabBarIcon:({focused,color,size})=>(
                         <Image source={
@@ -31,7 +33,7 @@ const BottomNavigation = ()=>{
                     )
                 }}
                 />
-                <Tab.Screen name="График" component={PrivateOffice} options={{
+                <Tab.Screen name="График" component={Schedule} options={{
                     tabBarLabel:"",
                     tabBarIcon:({focused,color,size})=>(
                         <Image source={

@@ -50,14 +50,14 @@ export class LoginIn extends React.Component<TodoProps, TodoState, { navigation:
         this.getToken();
         if(this.state.LoginIn=="true"){
             let {navigation} = this.props;
-            navigation.navigate("Login")
+            navigation.navigate("Выйти")
         }
     }
     getToken(){
         AsyncStorage.getItem('checkAuth').then((isLogin)=>{
             this.setState({LoginIn:isLogin})
             let {navigation} = this.props;
-            if(this.state.LoginIn=="true") navigation.navigate("Login")})
+            if(this.state.LoginIn=="true") navigation.navigate("Выйти")})
     }
     RequestHTTP(){
         try {

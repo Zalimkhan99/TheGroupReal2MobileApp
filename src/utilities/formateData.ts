@@ -1,11 +1,11 @@
-export default function formateData(date:any){
-    let dd:any = date.getDate();
+export default function formateData(date:Date){
+    let dd:number|string = date.getDate();
     if (dd < 10) dd = '0' + dd;
 
-    let mm:any = date.getMonth() + 1;
+    let mm:number|string = date.getMonth() + 1;
     if (mm < 10) mm = '0' + mm;
 
-    let yy:any = date.getFullYear() % 100;
+    let yy:number|string = date.getFullYear() % 100;
     if (yy < 10) yy = '0' + yy;
     return dd + '.' + mm + '.' + yy;
 }
