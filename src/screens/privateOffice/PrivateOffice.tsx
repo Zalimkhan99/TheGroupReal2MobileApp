@@ -12,7 +12,7 @@ interface TodoState {
     LoginUser?: string|null
     DataJSON?:[]
 }
-export class PrivateOffice extends React.Component<TodoProps, TodoState,{ navigation: any }> {
+export  class PrivateOffice extends React.Component<TodoProps, TodoState,{ navigation: any }> {
     constructor(props:TodoProps) {
         super(props);
         this.state={LoginUser:'', DataJSON:[]}
