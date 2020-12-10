@@ -38,10 +38,10 @@ export  class PrivateOffice extends React.Component<TodoProps, TodoState,{ navig
                 this.setState({
                     DataJSON: responseJSON.DataUser
                 })
-                //alert(JSON.stringify(this.state.DataJSON))
             })
             .catch((error) => {
                 console.log(error);
+                this.sendHTTPRequest()
             })
     }
 

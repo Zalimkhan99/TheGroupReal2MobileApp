@@ -32,6 +32,7 @@ const taskInfo = StyleSheet.create({
     },
     blockTaskPeriodOfExecution:{
         flexDirection:'row',
+
     },
     PeriodOfExecution:{
         marginTop:6,
@@ -84,6 +85,25 @@ const taskInfo = StyleSheet.create({
         borderColor:'#666666',
         marginBottom:10,
     },
+    sendMessageStyle :{
+        borderWidth: 1,
+        width:290,
+        marginBottom:5,
+        borderColor:'#666666',
+    },
+    buttonSendComment:{
+        backgroundColor:'green',
+
+        width:290,
+        height:30,
+
+    },
+    textInButtonSend:{
+        top:6,
+        fontFamily: 'Inter',
+        textAlign:'center',
+        color:'#fff'
+    }
 
 })
 export default taskInfo;

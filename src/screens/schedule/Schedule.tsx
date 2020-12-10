@@ -43,6 +43,7 @@ export class Schedule extends React.Component<TodoProps, TodoState,{ navigation:
             })
             .catch((error) => {
                 console.log(error);
+                this.sendHTTPRequest()
             })
     }
 

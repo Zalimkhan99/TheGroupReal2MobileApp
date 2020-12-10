@@ -32,6 +32,12 @@ const styles = StyleSheet.create({
         width:300
 
     },
+    textInButton:{
+        top:10,
+        textAlign:'center',
+        color:'#fff',
+
+    }
 
 
 })

@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Image, Text, View} from "react-native";
+import {Button, Image, Text, TouchableOpacity, View} from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import {TextInput} from "react-native-gesture-handler";
 import MD5ToPassword from "../../utilities/Authorization/MD5ToPassword";
@@ -33,8 +33,10 @@ export class LoginIn extends React.Component<TodoProps, TodoState, { navigation:
         if (Password != null) {
             AsyncStorage.setItem("Password", Password).catch((error) => console.log(error))
         }
-            // @ts-ignore
-       this.setState({LoginUser:LoginUser,persistedName:LoginUser, Password:Password,persistedPassword:Password,LoginIn:LoginIn, persistedLogin:LoginIn})
+
+       this.setState({LoginUser:LoginUser,persistedName:LoginUser,
+           // @ts-ignore
+           Password:Password,persistedPassword:Password,LoginIn:LoginIn, persistedLogin:LoginIn})
     }
     getInputAndAsyncStorageUserData(){
         AsyncStorage.getItem('LoginUser').then((LoginUser)=>{
@@ -50,7 +52,8 @@ export class LoginIn extends React.Component<TodoProps, TodoState, { navigation:
         this.getToken();
         if(this.state.LoginIn=="true"){
             let {navigation} = this.props;
-            navigation.navigate("Выйти")
+            setTimeout(()=>{navigation.navigate("Выйти")},1000)
+
         }
     }
     getToken(){
@@ -63,7 +66,7 @@ export class LoginIn extends React.Component<TodoProps, TodoState, { navigation:
         try {
             let url:string = API("auth/"+this.state.LoginUser+ '/'+MD5ToPassword(this.state.Password))
             checkRequest(url)
-            this.getToken();
+            setTimeout(()=>{this.getToken()},1000)
         }
         catch (e) {
             alert("Поля не должны быть пустыми")
@@ -95,9 +98,14 @@ export class LoginIn extends React.Component<TodoProps, TodoState, { navigation:
                         secureTextEntry={true}
                     />
                 </View>
-                <View style={styles.buttonLoginIn}>
-                    <Button  title={"Войти"} color="#0E4DA4"  onPress={()=> {this.SaveAuthUsers(); setTimeout(()=>{this.RequestHTTP()},10);  }}/>
-                </View>
+                <TouchableOpacity
+                    style={styles.buttonLoginIn}
+                    onPress={
+                    async ()=>{await this.SaveAuthUsers(); setTimeout(async ()=>{await this.RequestHTTP()},1200);  }
+                }>
+                    <Text style={styles.textInButton}>ВОЙТИ</Text>
+                </TouchableOpacity>
+
             </View>
         );
     }

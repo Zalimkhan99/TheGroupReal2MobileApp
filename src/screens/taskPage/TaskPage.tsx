@@ -21,32 +21,50 @@ export class TaskPage  extends React.Component<TodoProps, TodoState,{ navigation
         super(props);
         this.state={LoginUser:'', DataJSON:[],numberTaskGl:''}
     }
-    SaveNumberTask(){
-        let numberTaskGl:string | undefined = this.state.numberTaskGl;
 
-        if (numberTaskGl != null) {
+
+    SaveNumberTask(){
+        let numberTaskGl:any = this.state.numberTaskGl;
+        if (numberTaskGl != null && numberTaskGl != undefined) {
             AsyncStorage.setItem('numberTaskGl', numberTaskGl).catch((error) => console.log(error))
+
+            setTimeout(()=>{this.setState({numberTaskGl:numberTaskGl})},10)
         }
 
-        // @ts-ignore
-        this.setState({numberTaskGl:numberTaskGl})
     }
 
-    getUserNameAndNumberTask(){
-        AsyncStorage.getItem('LoginUser').then((LoginUser)=>{
+    getUserName(){
+            AsyncStorage.getItem('LoginUser').then((LoginUser)=>{
             this.setState({LoginUser:LoginUser})
-        })
-        AsyncStorage.getItem('numberTaskGl').then((numberTaskGl)=>{
-            this.setState({numberTaskGl:numberTaskGl})
-        })
+    })}
+
+    createClearNotificationURLHTTP(){
+        let url:string = API("moreinfotask/"+this.state.numberTaskGl+"/"+this.state.LoginUser)
+        return url
     }
     createURLHTTP(){
         let url:string = API("tasks/"+this.state.LoginUser)
         return url
     }
-
     sendHTTPRequest(){
         fetch(this.createURLHTTP(), {
+            method: 'GET'
+        })
+            .then((response) => response.json())
+            .then((responseJSON) => {
+                this.setState({
+                    DataJSON: responseJSON
+                })
+                console.log("ok")
+                //alert(JSON.stringify(this.state.DataJSON))
+            })
+            .catch((error) => {
+                console.log("task error");
+                this.sendHTTPRequest();
+            })
+    }
+    clearNotification():void{
+        fetch(this.createClearNotificationURLHTTP(), {
             method: 'GET'
         })
             .then((response) => response.json())
@@ -57,17 +75,22 @@ export class TaskPage  extends React.Component<TodoProps, TodoState,{ navigation
                 //alert(JSON.stringify(this.state.DataJSON))
             })
             .catch((error) => {
-                console.log(error);
+                console.log("task err2");
+                this.clearNotification;
             })
     }
 
     componentDidMount(): void {
-
-        this.getUserNameAndNumberTask()
-        setTimeout(()=>{
+        this.getUserName();
+       this.SaveNumberTask()
+        setInterval(()=>{this.sendHTTPRequest()},3000)
+      /*  setTimeout(()=>{
             this.sendHTTPRequest()
-        },10)
+        },3000)*/
+
     }
+
+
     render(){
         let elemList:any = this.state.DataJSON;
 
@@ -76,25 +99,19 @@ export class TaskPage  extends React.Component<TodoProps, TodoState,{ navigation
                 <View key={index}  style={taskStyle.globalContainerTask}>
                     <TouchableOpacity
                         onPress={ async () => {
+                           await this.SaveNumberTask()
+                           setTimeout(async ()=>{await this.clearNotification()},3000)
                             let numberTask = element.Number;
-                                    if (element.Number != null) {
-                                        AsyncStorage.setItem('numberTaskGl', element.Number).catch((error) => console.log(error))
-                                    }
-                            console.log(this.state.numberTaskGl)
-                            await this.SaveNumberTask()
+                            console.log(numberTask)
+                            this.setState({numberTaskGl:element.Number})
+                            AsyncStorage.setItem('numberTaskGl', element.Number).catch((error) => console.log(error))
 
-                            this.props.navigation.navigate("К задачам", );
 
-                            fetch(this.createURLHTTP())
-                                .then((response) => response.json())
-                                .then((responseJson) => {
-                                    this.setState({
-                                        DataJSON: responseJson,
-                                    });
-                                })
-                                .catch((error) => {
-                                    console.log(error);
-                                });
+                            //console.log(this.state.numberTaskGl)
+
+
+                            setTimeout(()=>{this.props.navigation.navigate("К задачам", );},300)
+
 
 
                         }}>
@@ -109,7 +126,6 @@ export class TaskPage  extends React.Component<TodoProps, TodoState,{ navigation
                                     :element.StatusApplications =="В работе"
                                         ?{color:"#FFBB12",marginLeft:25}
                                         :{color:"#0E4DA4"}
-
                             ]}>
                                 {element.StatusApplications}
                             </Text>
@@ -151,11 +167,8 @@ export class TaskPage  extends React.Component<TodoProps, TodoState,{ navigation
                     </TouchableOpacity>
 
                 </View >
-
                 <Text style={taskStyle.notification}> {element.notification } </Text>
-
             </View>
-
         ));
         return(
             <View style={styles.container}>
