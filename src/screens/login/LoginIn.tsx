@@ -24,6 +24,7 @@ export class LoginIn extends React.Component<TodoProps, TodoState, { navigation:
         // @ts-ignore
         this.state = {LoginUser:'', Password:'',LoginIn:''}
     }
+    //Сохранение в пароля и логина в асихроном хранилище
     SaveAuthUsers(){
         let LoginUser:string | undefined = this.state.LoginUser;
         let Password:string | undefined = this.state.Password;
@@ -38,6 +39,7 @@ export class LoginIn extends React.Component<TodoProps, TodoState, { navigation:
            // @ts-ignore
            Password:Password,persistedPassword:Password,LoginIn:LoginIn, persistedLogin:LoginIn})
     }
+    //получает данные с асинхроного хранилища
     getInputAndAsyncStorageUserData(){
         AsyncStorage.getItem('LoginUser').then((LoginUser)=>{
             // @ts-ignore
@@ -56,12 +58,14 @@ export class LoginIn extends React.Component<TodoProps, TodoState, { navigation:
 
         }
     }
+    //подставить данные с асинхроного хранилища в текствое поле
     getToken(){
         AsyncStorage.getItem('checkAuth').then((isLogin)=>{
             this.setState({LoginIn:isLogin})
             let {navigation} = this.props;
             if(this.state.LoginIn=="true") navigation.navigate("Выйти")})
     }
+    //отрпавить http запрос для авторизации в системе
     RequestHTTP(){
         try {
             let url:string = API("auth/"+this.state.LoginUser+ '/'+MD5ToPassword(this.state.Password))

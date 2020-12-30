@@ -22,7 +22,7 @@ export class TaskPage  extends React.Component<TodoProps, TodoState,{ navigation
         this.state={LoginUser:'', DataJSON:[],numberTaskGl:''}
     }
 
-
+//сохроняем номер задачи
     SaveNumberTask(){
         let numberTaskGl:any = this.state.numberTaskGl;
         if (numberTaskGl != null && numberTaskGl != undefined) {
@@ -32,20 +32,22 @@ export class TaskPage  extends React.Component<TodoProps, TodoState,{ navigation
         }
 
     }
-
+//получаем имя пользователя
     getUserName(){
             AsyncStorage.getItem('LoginUser').then((LoginUser)=>{
             this.setState({LoginUser:LoginUser})
     })}
-
+//создание строки запроса для очистки увдемоления
     createClearNotificationURLHTTP(){
         let url:string = API("moreinfotask/"+this.state.numberTaskGl+"/"+this.state.LoginUser)
         return url
     }
+    //создаем строку http запроса
     createURLHTTP(){
         let url:string = API("tasks/"+this.state.LoginUser)
         return url
     }
+    // Отправляем запрос и формируем полученный JSON
     sendHTTPRequest(){
         fetch(this.createURLHTTP(), {
             method: 'GET'
@@ -63,6 +65,8 @@ export class TaskPage  extends React.Component<TodoProps, TodoState,{ navigation
                 this.sendHTTPRequest();
             })
     }
+
+    //Убираем оповещение
     clearNotification():void{
         fetch(this.createClearNotificationURLHTTP(), {
             method: 'GET'
@@ -79,14 +83,12 @@ export class TaskPage  extends React.Component<TodoProps, TodoState,{ navigation
                 this.clearNotification;
             })
     }
-
+//запускамем функции
     componentDidMount(): void {
         this.getUserName();
        this.SaveNumberTask()
         setInterval(()=>{this.sendHTTPRequest()},3000)
-      /*  setTimeout(()=>{
-            this.sendHTTPRequest()
-        },3000)*/
+
 
     }
 
@@ -167,7 +169,10 @@ export class TaskPage  extends React.Component<TodoProps, TodoState,{ navigation
                     </TouchableOpacity>
 
                 </View >
-                <Text style={taskStyle.notification}> {element.notification } </Text>
+
+                    <Text style={taskStyle.notification}> {element.notification } </Text>
+
+
             </View>
         ));
         return(

@@ -37,6 +37,19 @@ const styles = StyleSheet.create({
         textAlign:'center',
         color:'#fff',
 
+    },
+    reportButton:{
+        width:100,
+        height:30,
+        backgroundColor:'green',
+        position:"relative",
+
+
+    },
+    textInReportButton:{
+        textAlign:'center',
+        color:'#fff',
+        fontSize:16,
     }
 
 

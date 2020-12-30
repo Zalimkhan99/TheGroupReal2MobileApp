@@ -79,6 +79,7 @@ import React from "react";
             <View  style={privateOffice.MotivationBlock}>
                 {item.BalanceWarning<24? vseok: pizdec}
             </View>
+
         </View>
     )
 }

@@ -4,6 +4,7 @@ import {PrivateOffice} from "./privateOffice/PrivateOffice";
 import {Schedule} from "./schedule/Schedule";
 import {Image} from "react-native";
 import {TaskPage} from "./taskPage/TaskPage";
+import {ReportKPI} from "./reportKPI/ReportKPI";
 
 const Tab = createBottomTabNavigator();
 
@@ -45,7 +46,22 @@ const BottomNavigation = ()=>{
                     )
                 }}
                 />
+                <Tab.Screen name={"Отчет"} component={ReportKPI} options={{
+                    tabBarLabel:"",
+                    tabBarIcon:({focused,color,size})=>(
+                        <Image source={
+                            focused
+                                ? require('./../res/images/Destination8.png')
+                                : require('./../res/images/Destination7.png')
+                        }
+                        />
+                    )
+                }}
+
+                />
+
             </Tab.Navigator>
+
     )
 }
 export default BottomNavigation;

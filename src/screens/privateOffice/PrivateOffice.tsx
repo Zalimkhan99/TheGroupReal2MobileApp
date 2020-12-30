@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import { View, FlatList} from 'react-native';
+import {View, FlatList, Text} from 'react-native';
 import {NavigationScreenProp} from "react-navigation";
 import AsyncStorage from "@react-native-community/async-storage";
 import API from "../../utilities/Authorization/API";
 import styles from "../../res/commonStyles/style";
 import renderItem from "../../res/Components/BlockPrivateOffice";
+import {TouchableOpacity} from "react-native-gesture-handler";
 interface TodoProps {
     navigation: NavigationScreenProp<string>;
 }
