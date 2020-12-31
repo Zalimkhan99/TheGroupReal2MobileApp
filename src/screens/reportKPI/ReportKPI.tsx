@@ -71,7 +71,7 @@ export class ReportKPI extends React.Component<TodoProps, TodoState,{ navigation
                             <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>Продажи</Text>
                             <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.SalesProgram}</Text>
                             <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.SalesCurrent}</Text>
-                            <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>-</Text>
+                            <Text style={[reportKPIStyle.purpleText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.PercentSales}</Text>
                     </View>
 
 
@@ -79,7 +79,7 @@ export class ReportKPI extends React.Component<TodoProps, TodoState,{ navigation
                         <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>Продажи аксессуаров</Text>
                         <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.PlanSaleAccessories}</Text>
                         <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.SalesOfAccessories}</Text>
-                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>-</Text>
+                        <Text style={[reportKPIStyle.purpleText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.PercentAccessories}</Text>
 
                     </View>
 
@@ -90,67 +90,82 @@ export class ReportKPI extends React.Component<TodoProps, TodoState,{ navigation
                         <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>Длина чека</Text>
                         <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.CheckLengthPlan}</Text>
                         <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.LengthOfCheck}</Text>
-                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>-</Text>
+                        <Text style={[reportKPIStyle.purpleText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.PercentCheckLength}</Text>
                     </View>
 
 
-                    <View>
-                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.textDefault, reportKPIStyle.centerText ]}>Средняя сумма чека</Text>
-                        <View style={reportKPIStyle.container}>
-                            <Text style={[reportKPIStyle.blueText,reportKPIStyle.textDefault,reportKPIStyle.planText]}>{element.AverageCheckPlan}</Text>
-                            <Text style={[reportKPIStyle.blueText,reportKPIStyle.textDefault,reportKPIStyle.factText]}>{element.AverageCheckAmount}</Text>
-                        </View>
+                    <View style={reportKPIStyle.container}>
+                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>Средняя сумма чека</Text>
+                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.AverageCheckPlan}</Text>
+                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.AverageCheckAmount}</Text>
+                        <Text style={[reportKPIStyle.purpleText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.PercentAverageCheck}</Text>
                     </View>
 
 
 
-                    <View>
-                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.textDefault, reportKPIStyle.centerText]}>Премия</Text>
-                        <View style={reportKPIStyle.container}>
-                            <Text style={[reportKPIStyle.blueText,reportKPIStyle.textDefault,reportKPIStyle.planText]}>{element.PlanAward}</Text>
-                            <Text style={[reportKPIStyle.blueText,reportKPIStyle.textDefault,reportKPIStyle.factText]}>{element.FactAwards}</Text>
-                        </View>
+                    <View style={reportKPIStyle.container}>
+                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>Премия с продаж</Text>
+
+                            <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.PlanAward}</Text>
+                            <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.FactAwards}</Text>
+                        <Text style={[reportKPIStyle.purpleText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.PercentageOfExecutionAwards}</Text>
                     </View>
 
                     <View style={reportKPIStyle.container}>
-                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.textDefault]}>Премия за выполнение длины чека</Text>
-                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.textDefault]}>{element.AwardFulfillmentCheckLength}</Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>Премия за выполнение длины чека</Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.AwardFulfillmentCheckLength}</Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
                     </View>
                     <View style={reportKPIStyle.container}>
-                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.textDefault]}>Премия с продаж аксессуаров</Text>
-                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.textDefault]}>{element.PrizeAccessories}</Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>Премия с продаж аксессуаров</Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.PrizeAccessories}</Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
+                    </View>
+
+                    <View style={reportKPIStyle.container}>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>Премия по категории</Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.GradeAward}</Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
                     </View>
                     <View style={reportKPIStyle.container}>
-                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.textDefault]}>Процент выпонения премии</Text>
-                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.textDefault]}>{element.PercentageOfExecutionAwards}%</Text>
+                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>BQ</Text>
+                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
+                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.AffiliateIRCHI}</Text>
+                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
                     </View>
                     <View style={reportKPIStyle.container}>
-                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.textDefault]}>Премия вашего грейда</Text>
-                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.textDefault]}>{element.GradeAward}</Text>
+                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>OPPO</Text>
+                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
+                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.AffiliateVVPGroup}</Text>
+                        <Text style={[reportKPIStyle.blueText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
                     </View>
                     <View style={reportKPIStyle.container}>
-                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.textDefault]}>BQ</Text>
-                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.textDefault]}>{element.AffiliateIRCHI}</Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>Премия с услуг</Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.ServicesEmployeeAward}</Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
+                    </View>
+
+                    <View style={reportKPIStyle.container}>
+                        <Text style={[reportKPIStyle.redText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>Количесво штрафов</Text>
+                        <Text style={[reportKPIStyle.redText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
+                        <Text style={[reportKPIStyle.redText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.Lateness}</Text>
+                        <Text style={[reportKPIStyle.redText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
                     </View>
                     <View style={reportKPIStyle.container}>
-                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.textDefault]}>OPPO</Text>
-                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.textDefault]}>{element.AffiliateVVPGroup}</Text>
+                        <Text style={[reportKPIStyle.redText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>Штрафы за опоздание</Text>
+                        <Text style={[reportKPIStyle.redText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
+                        <Text style={[reportKPIStyle.redText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.LatePenalties}</Text>
+                        <Text style={[reportKPIStyle.redText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
                     </View>
                     <View style={reportKPIStyle.container}>
-                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.textDefault]}>Премия с услуг</Text>
-                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.textDefault]}>{element.ServicesEmployeeAward}</Text>
-                    </View>
-                    <View style={reportKPIStyle.container}>
-                        <Text style={[reportKPIStyle.greenText, reportKPIStyle.textDefault]}>Зарплата</Text>
-                        <Text style={[reportKPIStyle.greenText, reportKPIStyle.textDefault]}>{element.Salary}</Text>
-                    </View>
-                    <View style={reportKPIStyle.container}>
-                        <Text style={[reportKPIStyle.redText,reportKPIStyle.textDefault]}>Количесво штрафов</Text>
-                        <Text style={[reportKPIStyle.redText,reportKPIStyle.textDefault]}>{element.Lateness}</Text>
-                    </View>
-                    <View style={reportKPIStyle.container}>
-                        <Text style={[reportKPIStyle.redText,reportKPIStyle.textDefault]}>Штрафы за опоздание</Text>
-                        <Text style={[reportKPIStyle.redText,reportKPIStyle.textDefault]}>{element.LatePenalties}</Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>Зарплата</Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}>{element.Salary}</Text>
+                        <Text style={[reportKPIStyle.greenText,reportKPIStyle.borderTable,reportKPIStyle.textDefault]}></Text>
                     </View>
 
             </View>

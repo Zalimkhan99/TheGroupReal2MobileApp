@@ -10,7 +10,7 @@ const reportKPIStyle = StyleSheet.create({
         flexDirection:'row',
         borderBottomWidth:1,
         borderBottomColor:'#C0C0C0',
-        padding:2,
+        //padding:2,
         justifyContent:"space-between",
         margin:0
     },
@@ -49,10 +49,29 @@ const reportKPIStyle = StyleSheet.create({
         borderWidth:1,
         paddingLeft:3,
         alignSelf: 'stretch',
-
-      //  padding:5
+        padding:2,
     },
+    listReport:{
+      borderWidth:2,
+        backgroundColor:'#008080',
+        width:'100%'
+    },
+    textInReportButton:{
+        fontFamily: 'Inter',
+        fontStyle: 'normal',
+        fontWeight: '600',
+        fontSize: 18,
+        textAlign: "center",
+        color:'#fff',
+    },
+    textHeader:{
+        fontFamily: 'Inter',
+        fontStyle: 'normal',
+        fontWeight: '600',
+        fontSize: 18,
 
+        //textAlign: "center",
+    }
 
 
 
