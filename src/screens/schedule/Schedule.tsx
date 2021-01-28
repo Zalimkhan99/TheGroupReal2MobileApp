@@ -78,7 +78,7 @@ export class Schedule extends React.Component<TodoProps, TodoState,{ navigation:
                     <Text style={scheduleStyle.WorkedTime}>{element.ArrivalTime} - {element.CareTime}</Text>
                 </View>
                 <Text style={
-                    [{color: "#666666"},
+                    [scheduleStyle.EndWorkTime,
                         element.WorkedTime == ""
                             ? {display: 'none'}
                             : {}

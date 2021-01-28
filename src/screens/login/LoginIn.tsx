@@ -8,6 +8,7 @@ import API from "../../utilities/Authorization/API";
 import styles from "../../res/commonStyles/style";
 import fonts from "../../res/font/fontsStyle";
 import { NavigationScreenProp } from 'react-navigation';
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 interface TodoProps {
     navigation: NavigationScreenProp<string>;
@@ -79,7 +80,11 @@ export class LoginIn extends React.Component<TodoProps, TodoState, { navigation:
 
     render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAwareScrollView
+                scrollEnabled={false}
+                contentContainerStyle={styles.container}
+                resetScrollToCoords={{ x: 0, y: 0 }}
+            >
                 <View>
                     <Image style={styles.imageLogo} source={require('../../res/images/Logo.png')}/>
                 </View>
@@ -110,7 +115,7 @@ export class LoginIn extends React.Component<TodoProps, TodoState, { navigation:
                     <Text style={styles.textInButton}>ВОЙТИ</Text>
                 </TouchableOpacity>
 
-            </View>
+            </KeyboardAwareScrollView>
         );
     }
 }

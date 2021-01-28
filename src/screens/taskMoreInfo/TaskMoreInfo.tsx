@@ -9,6 +9,7 @@ import {View, Text, Button, unstable_enableLogBox} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 import sendComment from "../../utilities/HTTPRequest/sendComment";
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 interface TodoProps {
     navigation: NavigationScreenProp<any>;
 }
@@ -243,7 +244,9 @@ export class TaskMoreInfo  extends React.Component<TodoProps, TodoState,{ naviga
 
         return (
             <ScrollView style={taskInfo.container} >
-                {listItem}
+                <KeyboardAwareScrollView>
+                    {listItem}
+                </KeyboardAwareScrollView>
             </ScrollView>
         )
     }

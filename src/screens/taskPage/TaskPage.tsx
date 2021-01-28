@@ -136,9 +136,9 @@ export class TaskPage  extends React.Component<TodoProps, TodoState,{ navigation
                         <Text style={[taskStyle.taskName ]}>{element.NameTasks}</Text>
 
                         <Text style={taskStyle.customerAndExecutor}>{"Заказчик"}</Text>
-                        <Text style={{fontSize:12, marginBottom:5}}>{element.Customer}</Text>
+                        <Text style={[taskStyle.authorsStyle ,{ marginBottom:5}]}>{element.Customer}</Text>
                         <Text style={taskStyle.customerAndExecutor}>{"Исполнитель"} </Text>
-                        <Text style={{fontSize:12}}>{element.Executor}{`\n`}</Text>
+                        <Text style={[taskStyle.authorsStyle]}>{element.Executor}{`\n`}</Text>
 
                         <View style={taskStyle.blockTaskPeriodOfExecution}>
                             <Text style={[taskStyle.statusAndNumberTaskAndPeriodOfExecution,
