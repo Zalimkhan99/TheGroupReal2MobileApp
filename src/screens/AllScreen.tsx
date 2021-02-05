@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 const  AllScreen=  ()=>{
     return(
         <NavigationContainer>
-            <Stack.Navigator initialRouteName={"Вход"}>
+            <Stack.Navigator initialRouteName={"Вход"} >
                 <Stack.Screen name="Вход" component={LoginIn}/>
                 <Stack.Screen name={"Выйти"} component={BottomNavigation}/>
                 <Stack.Screen name="К задачам" component={TaskMoreInfo} initialParams={{}}/>

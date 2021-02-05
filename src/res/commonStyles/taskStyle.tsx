@@ -7,7 +7,7 @@ let screenWidth = Dimensions.get('window').width ;
 if(screenWidth<390){
     padding = 45;
 }
-else if(screenWidth > 390 && screenWidth < 721){padding=20;fontSize=18;fontSizeAuthor= 16}
+else if(screenWidth > 390 && screenWidth < 721){padding=55;fontSize=18;fontSizeAuthor= 16}
 
 let width = (Dimensions.get('window').width - padding) ; //full width
 let height = Dimensions.get('window').height; //full height

@@ -5,11 +5,13 @@ import API from "../../utilities/Authorization/API";
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 
 import taskInfo from "../../res/commonStyles/taskMoreInfoStyle";
-import {View, Text, Button, unstable_enableLogBox} from 'react-native';
+import {View, Text, Button, } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 import sendComment from "../../utilities/HTTPRequest/sendComment";
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+
+
 interface TodoProps {
     navigation: NavigationScreenProp<any>;
 }
@@ -46,33 +48,33 @@ export class TaskMoreInfo  extends React.Component<TodoProps, TodoState,{ naviga
     sendHTTPRequest   () {
         let url: string = this.createURLHTTP();
         //setTimeout(()=>{
-            fetch(url, {
-                method: 'GET'
+        fetch(url, {
+            method: 'GET'
+        })
+            .then( (response) => response.json())
+            .then( (responseJSON) => {
+                this.setState({
+                    DataJSON: responseJSON
+
+                })
+
             })
-                .then( (response) => response.json())
-                .then( (responseJSON) => {
-                     this.setState({
-                        DataJSON: responseJSON
+            .catch((error) => {
+                console.log(
+                    error
+                )
+                // console.log(this.createURLHTTP())
+                // this.createURLHTTP()
 
-                    })
+                this.sendHTTPRequest()
+                //setTimeout(()=>,3000)
+            })
 
-                })
-                .catch((error) => {
-                    console.log(
-                        error
-                    )
-                   console.log(this.createURLHTTP())
-                   // this.createURLHTTP()
-
-                    this.sendHTTPRequest()
-                    //setTimeout(()=>,3000)
-                })
-
-       // },3000)
+        // },3000)
 
     }
 
-     componentDidMount() {
+    componentDidMount() {
         this._ismounte = true
         this.getUserNameAndNumberTask()
         setTimeout(() => {
@@ -81,9 +83,9 @@ export class TaskMoreInfo  extends React.Component<TodoProps, TodoState,{ naviga
 
 
     }
-  UNSAFE_componentWillMount(): void {
-       this._ismounte = false
-  }
+    UNSAFE_componentWillMount(): void {
+        this._ismounte = false
+    }
 
     render(): React.ReactNode {
         let elemList:any = this.state.DataJSON
@@ -178,7 +180,7 @@ export class TaskMoreInfo  extends React.Component<TodoProps, TodoState,{ naviga
 
                 <View  style={taskInfo.commentsBlock}
 
-                     >
+                >
                     <Text  style = {taskInfo.commentsHead}>{"Комментарии"}</Text>
                     <Text>{element.ComentUser.map((elemen:any, inkey:any)=>
                         <Text key={inkey} >
@@ -190,6 +192,7 @@ export class TaskMoreInfo  extends React.Component<TodoProps, TodoState,{ naviga
                             {'\n'}
                         </Text> ) }
                     </Text>
+
                     <TextInput
                         style={taskInfo.sendMessageStyle}
                         value={this.state.comment}
@@ -200,21 +203,28 @@ export class TaskMoreInfo  extends React.Component<TodoProps, TodoState,{ naviga
 
                     </TextInput>
 
-                        <TouchableOpacity
-                             style={taskInfo.buttonSendComment}
-                            disabled={this.state.stateButton}
-                            onPress={()=>{
-                                let url:string = API("sendmsg/"+this.state.numberTaskGl+'/'+this.state.LoginUser+'/'+this.state.comment);
-                                this.state.comment!='' ?sendComment(url):alert("Нельзя отправить пустой комментарий") ;
-                                setTimeout(()=>{this.sendHTTPRequest()},100);
-                                setTimeout(()=>{this.setState({comment:''})},1000)
-                                this.setState({stateButton:true})
-                                setTimeout(()=>this.setState({stateButton:false}),4000)
-                                 }
-                            }
-                        >
-                            <Text style={taskInfo.textInButtonSend}>ОТПРАВИТЬ</Text>
-                        </TouchableOpacity>
+                    <TouchableOpacity
+                        style={taskInfo.buttonSendComment}
+                        disabled={this.state.stateButton}
+                        onPress={()=>{
+                            // @ts-ignore
+                            let url:string = API("sendmsg/"+this.state.numberTaskGl+'/'+this.state.LoginUser+'/'+encodeURIComponent( this.state.comment));
+                            this.state.comment!='' ?sendComment(url):alert("Нельзя отправить пустой комментарий") ;
+                            setTimeout(()=>{this.sendHTTPRequest()},100);
+                            fetch(url)
+                                .then((response)=>{
+                                    if(response.ok){
+                                        setTimeout(()=>{this.setState({comment:''})},1000)
+                                    }
+                                }).catch((error)=>console.log(error) )
+
+                            this.setState({stateButton:true})
+                            setTimeout(()=>this.setState({stateButton:false}),4000)
+                        }
+                        }
+                    >
+                        <Text style={taskInfo.textInButtonSend}>ОТПРАВИТЬ</Text>
+                    </TouchableOpacity>
 
 
 
@@ -240,14 +250,17 @@ export class TaskMoreInfo  extends React.Component<TodoProps, TodoState,{ naviga
                 </View>
 
             </View>
-))
+        ))
 
         return (
-            <ScrollView style={taskInfo.container} >
-                <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView>
+                <ScrollView style={taskInfo.container} >
+
                     {listItem}
-                </KeyboardAwareScrollView>
-            </ScrollView>
+
+
+                </ScrollView>
+            </KeyboardAwareScrollView>
         )
     }
 }

@@ -2,16 +2,18 @@ import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {PrivateOffice} from "./privateOffice/PrivateOffice";
 import {Schedule} from "./schedule/Schedule";
-import {Image} from "react-native";
+import {Image, Dimensions} from "react-native";
 import {TaskPage} from "./taskPage/TaskPage";
 import ListReports from "./reportKPI/ListReports";
 
-
+let screenWidth = Dimensions.get('window').width ;
+let screenHeight = Dimensions.get('window').height;
+alert( screenHeight)
 const Tab = createBottomTabNavigator();
 
 const BottomNavigation = ()=>{
     return(
-            <Tab.Navigator initialRouteName={"Home"}>
+            <Tab.Navigator initialRouteName={"Home"} tabBarOptions={{style:{height:60,padding:10}}}>
                 <Tab.Screen name="Кабинет" component={PrivateOffice} options={{
                     tabBarLabel:"",
                     tabBarIcon:({focused,color,size})=>(
